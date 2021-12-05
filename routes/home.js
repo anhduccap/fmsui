@@ -8,4 +8,14 @@ const middlewares = require('../helpers/middlewares');
 /* GET home page. */
 router.get('/', middlewares.checkToken, homeController.homepage);
 
+
+
+
+
+
+router.get('/test', (req, res) => {
+    res.render('index');
+});
+
+
 module.exports = router;
