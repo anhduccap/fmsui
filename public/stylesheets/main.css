@@ -1,6 +1,9 @@
 :root {
   --color-primary: #c70101;
   --color-gradient: linear-gradient(to right, red, white);
+  --color-background-1: #fff;
+  --color-background-2: rgb(245, 245, 245);
+  --color-background-3: rgb(235, 235, 235);
 }
 
 /*------------------------------------------------------*/
@@ -174,10 +177,11 @@
 .content--header {
   display: flex;
   padding-top: 24px;
+  margin-bottom: 32px;
 }
 
 .header--avatar {
-  width: 15%;
+  width: 10%;
   border: 4px solid var(--color-primary);
   border-radius: 50%;
   padding: 8px;
@@ -213,4 +217,277 @@
   font-size: 18px;
   font-weight: 600;
   color: #797979;
+}
+
+.content--next-match {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 32px;
+  background: var(--color-background-1);
+  /* background: #fff;
+  box-shadow: 6px 6px 12px 1px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 6px 6px 12px 1px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 6px 6px 12px 1px rgba(0, 0, 0, 0.15); */
+  padding: 12px 0;
+  margin-bottom: 32px;
+}
+
+.next-match--title {
+  font-family: "Alfa Slab One", cursive;
+  font-size: 20px;
+  color: #454545;
+}
+
+.next-match--tournament {
+  height: 50px;
+}
+
+.next-match--tournament img {
+  height: 100%;
+}
+
+.next-match--squad {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.squad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+}
+
+.squad-logo {
+  width: 50%;
+  margin-bottom: 12px;
+}
+
+.squad-name {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.next-match--vs {
+  font-family: "Alfa Slab One", cursive;
+  font-size: 16px;
+  color: #454545;
+}
+
+.next-match--date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.next-match--time {
+  font-weight: 600;
+}
+
+.next-match--day {
+  font-size: 17px;
+}
+
+.next-match--stadium {
+  display: flex;
+  align-items: center;
+}
+
+.stadium-name {
+  font-weight: 600;
+  margin-left: 12px;
+}
+
+/* -------- LECTURE ---------*/
+.content--lecture {
+  padding-top: 16px;
+}
+
+.lecture--header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.lecture--header-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.lecture--header-button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #ff6969;
+}
+
+.lecture--header-button:hover {
+  color: var(--color-primary);
+}
+
+.lecture--list {
+  display: flex;
+  justify-content: space-around;
+}
+
+.lecture--item {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  height: 250px;
+  padding: 20px;
+  background: var(--color-background-1);
+  border-radius: 12px;
+}
+
+.lecture--item-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #d4d4d4;
+}
+
+.item-header--img {
+  width: 20%;
+}
+
+.item-header--img img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+@media (max-width: 1325px) {
+  .item-header--img {
+    display: none;
+  }
+}
+
+.item-header--title {
+  display: flex;
+  flex-direction: column;
+  margin-left: 12px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.item-header--author {
+  display: flex;
+  align-items: center;
+  color: #646464;
+  font-weight: bold;
+}
+
+.lecture--item-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  margin-bottom: 12px;
+}
+
+.lecture--item-content span {
+  padding-left: 16px;
+}
+
+.lecture-time {
+  display: flex;
+  align-items: center;
+}
+
+.lecture-start-date {
+  display: flex;
+  align-items: center;
+}
+
+.lecture-room {
+  display: flex;
+  align-items: center;
+}
+
+.lecture--detail-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lecture--detail-btn a {
+  color: #ff6969;
+}
+
+.lecture--detail-btn a:hover {
+  color: var(--color-primary);
+}
+
+/*------------------------------------------------------*/
+/*--------------------- SuB ---------------------------*/
+/*------------------------------------------------------*/
+
+.sub-content--standings {
+  margin-left: 16px;
+  padding: 24px 16px 0 16px;
+}
+
+.stadings--header {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.standings--content {
+  background: var(--color-background-1);
+  padding: 12px;
+  border-radius: 12px;
+  border-left: 8px solid var(--color-primary);
+}
+
+.standings--table {
+  border-collapse: collapse;
+  width: 100%;
+  padding: 12px;
+}
+
+.standings--table thead tr {
+  text-align: center;
+}
+
+.standings--table tbody tr {
+  border-top: 1px solid #d4d4d4;
+  height: 36px;
+}
+
+.standings--rank {
+  text-align: center;
+}
+
+.standings--team {
+  display: flex;
+  padding-left: 20px;
+  align-items: center;
+}
+
+.standings--team img {
+  width: 24px;
+  height: 24px;
+}
+
+.standings--team span {
+  margin-left: 4px;
+}
+
+.standings--played {
+  text-align: center;
+}
+
+.standings--gd {
+  text-align: center;
+}
+
+.standings--point {
+  text-align: center;
+  font-weight: 600;
 }
