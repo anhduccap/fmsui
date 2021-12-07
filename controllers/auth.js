@@ -1,6 +1,7 @@
 const axios = require('axios');
 
 exports.loadLoginPage = async (req, res, next) => {
+    res.clearCookie('auth-token');
     res.render('login', {response: null});
 }
 

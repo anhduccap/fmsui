@@ -53,8 +53,19 @@ exports.homepage = async (req, res, next) => {
     .then(response => {
         let standings = response[1].response[0].league;
 
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+        let time = new Date(response[2].response[0].fixture.date);
+        let date = {
+            year: time.getFullYear(),
+            month: monthNames[time.getUTCMonth()],
+            day: time.getUTCDate(),
+            hour: time.getUTCHours(),
+            minute: time.getUTCMinutes()
+        }
+
         let nextMatch = {
-            date: response[2].response[0].fixture.date,
+            date: date,
             timestamp: response[2].response[0].fixture.timestamp,
             stadium: response[2].response[0].fixture.venue.name,
             city: response[2].response[0].fixture.venue.city,
@@ -63,10 +74,10 @@ exports.homepage = async (req, res, next) => {
             team_home: response[2].response[0].teams.home,
             team_away: response[2].response[0].teams.away,
         };
-        console.log(nextMatch);
         // console.log(response[1].response[0].league.standings[0]);
         // console.log(response[2].response[0]);
-        return res.render('home', {title: 'Home', member: response[0], standings: standings, nextMatch: nextMatch});
+        // console.log(standings)
+        return res.render('home', {member: response[0], standings: standings, nextMatch: nextMatch});
     })
     .catch(err => {
         console.log(err);
