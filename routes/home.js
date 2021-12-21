@@ -8,7 +8,8 @@ const middlewares = require('../helpers/middlewares');
 /* GET home page. */
 router.get('/', middlewares.checkToken, homeController.homepage);
 
-
+/* GET statistic page. */
+router.get('/stat', middlewares.checkToken, homeController.getPlayerStat);
 
 
 

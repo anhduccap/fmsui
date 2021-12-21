@@ -83,3 +83,7 @@ exports.homepage = async (req, res, next) => {
         console.log(err);
     });
 }
+
+exports.getPlayerStat = async (req, res) => {
+    return res.render('player_stat');
+}
