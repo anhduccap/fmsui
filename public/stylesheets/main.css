@@ -513,6 +513,10 @@
   padding: 8px;
 }
 
+.player-stat__avatar img {
+  border-radius: 50%;
+}
+
 .player-stat__header {
   display: flex;
   justify-content: space-between;
@@ -689,3 +693,215 @@
 .data-plus--title {
   font-weight: 600;
 }
+
+/* ------------- Line up suggestion ---------------- */
+
+.lineup-suggestion--main {
+  padding-top: 32px;
+}
+
+.lineup-suggestion--title {
+  margin-bottom: 20px;
+}
+
+.lineup-suggestion--title span {
+  font-size: 32px;
+  font-weight: 600;
+  color: rgb(100, 100, 100);
+}
+
+.lineup-suggestion--multichoice {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 44px;
+}
+.suggestion-multichoice--item {
+  padding: 12px 24px;
+  background: #ff6c6c;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.suggestion-multichoice--item:hover {
+  background: #dc95dd;
+}
+
+.suggestion-multichoice--item span {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.squad-choice--active {
+  background: #dc95dd;
+}
+
+.lineup-suggestion--squad {
+  position: relative;
+  background: rgb(255, 255, 255);
+  border-radius: 16px;
+  background-image: url("/images/pitch.png");
+  padding: 32px 0 2px 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 0 0 12px rgb(206, 206, 206);
+}
+
+.squad-row {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 32px;
+}
+
+.squad-position {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20%;
+}
+
+.squad-position--disabled {
+  display: none;
+}
+
+.squad-position img {
+  width: 35%;
+  border-radius: 50%;
+}
+
+.squad-position span {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.lineup-suggestion--sub {
+  padding-top: 32px;
+}
+
+.suggestion-sub--title {
+  font-size: 28px;
+  font-weight: 600;
+  color: rgb(100, 100, 100);
+  padding-left: 32px;
+  margin-bottom: 12px;
+}
+
+.suggestion-sub--list {
+  display: flex;
+  flex-direction: column;
+  padding-left: 32px;
+}
+
+.suggestion-sub--item {
+  display: flex;
+  align-items: center;
+}
+
+.sub-item--label {
+  padding: 8px 8px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.sub-item--label-goalkeeper {
+  background: #f6e785;
+}
+
+.sub-item--label-defender {
+  background: #67d0dd;
+}
+
+.sub-item--label-midfielder {
+  background: #9fe481;
+}
+
+.sub-item--label-attacker {
+  background: #faafa5;
+}
+
+.sub-item--postion {
+  width: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sub-item--postion span {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.sub-item--number {
+  width: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sub-item--number span {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.sub-item--name {
+  padding-left: 12px;
+}
+
+.sub-item--name span {
+  font-size: 20px;
+}
+
+.calculate-loading {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.863);
+  padding: 4px;
+  border: 4px solid 0 0 12px #fff;
+  z-index: 100;
+  border-radius: 16px;
+}
+
+.calculate-loading img {
+  width: 50%;
+}
+
+.loader--active {
+  display: flex;
+}
+
+/* .calculate-loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid blue;
+  border-right: 16px solid green;
+  border-bottom: 16px solid red;
+  border-left: 16px solid pink;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} */

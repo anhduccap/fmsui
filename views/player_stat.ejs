@@ -101,36 +101,36 @@
                         <div class="main-content main-content--statistic">
                             <div class="content__player-stat-header">
                                 <div class="player-stat__avatar">
-                                    <img src="" onerror="this.src='/images/logo.png'">
+                                    <img src="<%= data.player.avatar %>" onerror="this.src='/images/logo.png'">
                                 </div>
                                 <div class="player-stat__header">
                                     <div class="player-stat__header-attribute">
                                         <div class="player-stat__header-name">
-                                            <span>Cristiano Ronaldo</span>
+                                            <span><%= data.player.name %></span></span>
                                         </div>
                                         <div class="player-stat__header-number">
-                                            <span>#7</span>
+                                            <span>#<%= data.player.kit_number %></span>
                                         </div>
                                     </div>
                                     <div class="player-stat__header-attribute">
                                         <span class="player-stat__header-title">Position</span>
-                                        <span>Attacker</span>
+                                        <span><%= data.player.position %></span></span>
                                     </div>
                                     <div class="player-stat__header-attribute">
                                         <span class="player-stat__header-title">Nationality</span>
-                                        <span>Portugal</span>
+                                        <span><%= data.stat.player.nationality %></span>
                                     </div>
                                     <div class="player-stat__header-attribute">
                                         <span class="player-stat__header-title">Age</span>
-                                        <span>36</span>
+                                        <span><%= data.stat.player.age %></span>
                                     </div>
                                     <div class="player-stat__header-attribute">
                                         <span class="player-stat__header-title">Weight</span>
-                                        <span>83 kg</span>
+                                        <span><%= data.stat.player.weight %></span>
                                     </div>
                                     <div class="player-stat__header-attribute">
                                         <span class="player-stat__header-title">Height</span>
-                                        <span>187 cm</span>
+                                        <span><%= data.stat.player.height %></span>
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +146,7 @@
                                             Rating
                                         </span>
                                         <span class="stat-component--content">
-                                            7.2
+                                            <%= parseFloat(data.stat.statistics[0].games.rating).toFixed(2) %> 
                                         </span>
                                     </div>
                                 </div>
@@ -161,7 +161,7 @@
                                             Minutes
                                         </span>
                                         <span class="stat-component--content">
-                                            1250
+                                            <%= data.stat.statistics[0].games.minutes %>
                                         </span>
                                     </div>
                                 </div>
@@ -176,7 +176,7 @@
                                             Yellow card
                                         </span>
                                         <span class="stat-component--content">
-                                            5
+                                            <%= data.stat.statistics[0].cards.yellow %>
                                         </span>
                                     </div>
                                 </div>
@@ -191,17 +191,18 @@
                                             Red card
                                         </span>
                                         <span class="stat-component--content">
-                                            0
+                                            <%= data.stat.statistics[0].cards.red %>
                                         </span>
                                     </div>
                                 </div>
                             </div>
+                            <div id="data-response" data-response="<%= data %>"></div>
                             <div class="content__player-stat-detail-row2">
                                 <div class="player-stat--component" style="width: 30%;">
                                     <div class="stat-component--chart">
                                         <canvas id="apprearenceChart"></canvas>
                                         <span class="component-chart--label-apprearence">
-                                            07
+                                            <%= data.stat.statistics[0].games.appearences %>
                                         </span>
                                     </div>
                                 </div>
@@ -336,6 +337,18 @@
     <!--  Chart js  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.2/chart.min.js" integrity="sha512-tMabqarPtykgDtdtSqCL3uLVM0gS1ZkUAVhRFu1vSEFgvB73niFQWJuvviDyBGBH22Lcau4rHB5p2K2T0Xvr6Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
+        const dataResponseObject = document.getElementById('data-response');
+
+        let dataResponse = dataResponseObject.datasets.response;
+
+        console.log(dataResponse.stat);
+        // const appearenceChartDataset = [
+        //     dataResponse.stat.games.lineups,
+        //     dataResponse.stat.substitutes.in,
+        //     dataResponse.stat.substitutes.bench,
+        //     dataResponse.round - dataResponse.stat.games.appearences - dataResponse.stat.substitutes.bench,
+        // ];
+
         const ctx_appearence = document.getElementById('apprearenceChart').getContext('2d');
         const apprearenceChart = new Chart(ctx_appearence, {
             type: 'doughnut',
@@ -347,7 +360,7 @@
                     'Absent'
                 ],
                 datasets: [{
-                    data: [6, 1, 1, 8],
+                    data: [6,1,1,9],
                     backgroundColor: [
                     'rgb(255, 99, 132)',
                     'rgb(54, 162, 235)',

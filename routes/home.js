@@ -11,6 +11,9 @@ router.get('/', middlewares.checkToken, homeController.homepage);
 /* GET statistic page. */
 router.get('/stat', middlewares.checkToken, homeController.getPlayerStat);
 
+/* GET line up suggestion page. */
+router.get('/lineup', middlewares.checkToken, homeController.lineupSuggestion);
+
 
 
 
