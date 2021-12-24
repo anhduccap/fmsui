@@ -124,19 +124,19 @@ exports.getPlayerStat = async (req, res) => {
         .catch(err => reject(err));
     });
 
-    await Promise.all([getPlayer, getStanding, getStat])
+    await Promise.all([getPlayer])
     .then(response => {
-        console.log(response[1].response[0].league)
-        let standings = response[1].response[0].league.standings[0];
-        let round = standings.find(clb => clb.team.id === 33);
+        // console.log(response[1].response[0].league)
+        // let standings = response[1].response[0].league.standings[0];
+        // let round = standings.find(clb => clb.team.id === 33);
 
         let data = {
             player: response[0].data,
-            stat: response[2].data.response[0],
-            round: round.all.played,
+            // stat: response[2].data.response[0],
+            // round: round.all.played,
         };
 
-        // console.log(data.stat.statistics[0]);
+        // console.log(data);
 
         return res.render('player_stat', {data: data});
     })

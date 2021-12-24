@@ -1,4 +1,4 @@
-function getCookie(name) {
+let getCookie = (name) => {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
     for(var i=0;i < ca.length;i++) {
