@@ -124,14 +124,28 @@ exports.getPlayerStat = async (req, res) => {
         .catch(err => reject(err));
     });
 
-    await Promise.all([getPlayer])
+    let getComment = new Promise((resolve, reject) => {
+        axios({
+            method: 'GET',
+            url: process.env.API_URL + '/player/' + req.member_id + '/comment',
+            headers: {
+                'auth-token': req.cookies['auth-token'],
+            }
+        })
+        .then( response => resolve(response.data))
+        .catch(err => reject(err));
+    })
+
+    await Promise.all([getPlayer, getComment])
     .then(response => {
         // console.log(response[1].response[0].league)
         // let standings = response[1].response[0].league.standings[0];
         // let round = standings.find(clb => clb.team.id === 33);
 
+
         let data = {
             player: response[0].data,
+            comment: response[1].data,
             // stat: response[2].data.response[0],
             // round: round.all.played,
         };
@@ -141,7 +155,8 @@ exports.getPlayerStat = async (req, res) => {
         return res.render('player_stat', {data: data});
     })
     .catch(err => {
-        console.log(err);
+        console.log(err.data.message);
+        return res.render('player_stat', {data: null});
     });
 }
 

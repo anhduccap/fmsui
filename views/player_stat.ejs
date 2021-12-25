@@ -207,28 +207,23 @@
                                             Comment box
                                         </span>
                                         <div class="component-comment--content">
-                                            <div class="component-comment--item">
-                                                <div class="comment-item--author">
-                                                    <span>Coach</span>
+                                            <% data.comment.forEach(cmt => { %>
+                                                <div class="component-comment--item">
+                                                    <div class="comment-item--author">
+                                                        <span><%= cmt.coach_name %></span>
+                                                    </div>
+                                                    <div class="comment-item--message">
+                                                        <span><span><%= unescape(cmt.content) %></span></span>
+                                                    </div>
+                                                    <div class="comment-item--date">
+                                                        <% 
+                                                            let date = new Date(cmt.date);
+                                                            let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                                                        %>
+                                                        <span><%= date.toLocaleDateString("en-US", options) %></span>
+                                                    </div>
                                                 </div>
-                                                <div class="comment-item--message">
-                                                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus qui fugit molestiae laboriosam quae sunt sed quam esse possimus eius. Odit, cumque. Illo accusantium corrupti eos sapiente doloribus, aspernatur voluptas.</span>
-                                                </div>
-                                                <div class="comment-item--date">
-                                                    <span>Dec 26, 2021</span>
-                                                </div>
-                                            </div>
-                                            <div class="component-comment--item">
-                                                <div class="comment-item--author">
-                                                    <span>Coach</span>
-                                                </div>
-                                                <div class="comment-item--message">
-                                                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus qui fugit molestiae laboriosam quae sunt sed quam esse possimus eius. Odit, cumque. Illo accusantium corrupti eos sapiente doloribus, aspernatur voluptas.</span>
-                                                </div>
-                                                <div class="comment-item--date">
-                                                    <span>Dec 26, 2021</span>
-                                                </div>
-                                            </div>
+                                            <% }) %> 
                                         </div>
                                         <div class="component-comment--input">
                                             <input type="text" id="comment--input" placeholder="Write a comment...">
@@ -356,6 +351,15 @@
         let token = getCookie('auth-token');
 
         let payLoad = parseJwt(token);
+
+        if(payLoad.data.role === 3) {
+            $('.component-comment--input').css('display', 'none');
+            $('.component-comment--content').css('max-height', '225px');
+        }
+        else {
+            $('.component-comment--input').css('display', 'flex');
+            $('.component-comment--content').css('max-height', '210px');
+        }
 
         $.ajax({
             url: 'http://localhost:3001/player/' + payLoad.data.member_id + '/statistic',
