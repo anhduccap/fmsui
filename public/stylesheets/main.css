@@ -686,6 +686,9 @@
 .comment-send {
   margin: 0 12px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 4px 0;
 }
 
 /* .stat-component--position {

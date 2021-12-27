@@ -4,9 +4,11 @@ const createError = require('http-errors');
 
 const homeRouter = require('./home');
 const authRouter = require('./auth');
+const adminRouter = require('./admin');
 
 router.use('/auth', authRouter);
 router.use('/', homeRouter);
+router.use('/admin', adminRouter);
 
 
 // catch 404 and forward to error handler

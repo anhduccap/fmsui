@@ -35,12 +35,21 @@
                                             <p>Dashboard</p>
                                         </a>
                                     </li>
-                                    <li class="menu-item menu-item--active">
-                                        <a href="/stat" class="menu-link menu-link--active">
-                                            <span class="material-icons">poll</span>
-                                            <p>Statistics</p>
-                                        </a>
-                                    </li>
+                                    <% if(data.viewer_role === 3) { %>
+                                        <li class="menu-item menu-item--active">
+                                            <a href="/stat" class="menu-link menu-link--active">
+                                                <span class="material-icons">poll</span>
+                                                <p>Statistics</p>
+                                            </a>
+                                        </li>
+                                    <% } else { %> 
+                                        <li class="menu-item menu-item--active">
+                                            <a href="/players" class="menu-link menu-link--active">
+                                                <span class="material-icons">poll</span>
+                                                <p>Management</p>
+                                            </a>
+                                        </li>
+                                    <% } %> 
                                     <li class="menu-item">
                                         <a href="" class="menu-link">
                                             <span class="material-icons">event</span>
@@ -213,7 +222,7 @@
                                                         <span><%= cmt.coach_name %></span>
                                                     </div>
                                                     <div class="comment-item--message">
-                                                        <span><span><%= unescape(cmt.content) %></span></span>
+                                                        <span><%= unescape(cmt.content) %></span>
                                                     </div>
                                                     <div class="comment-item--date">
                                                         <% 
@@ -324,193 +333,245 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.2/chart.min.js" integrity="sha512-tMabqarPtykgDtdtSqCL3uLVM0gS1ZkUAVhRFu1vSEFgvB73niFQWJuvviDyBGBH22Lcau4rHB5p2K2T0Xvr6Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
+        $(document).ready(() => {
+            const GLOBAL_ROUND = 17;
 
-        const GLOBAL_ROUND = 16;
-
-        let getCookie = (name) => {
-            var nameEQ = name + "=";
-            var ca = document.cookie.split(';');
-            for(var i=0;i < ca.length;i++) {
-                var c = ca[i];
-                while (c.charAt(0)==' ') c = c.substring(1,c.length);
-                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+            let setCookie = (name,value,days) => {
+                var expires = "";
+                if (days) {
+                    var date = new Date();
+                    date.setTime(date.getTime() + (days*24*60*60*1000));
+                    expires = "; expires=" + date.toUTCString();
+                }
+                document.cookie = name + "=" + (value || "")  + expires + "; path=/";
             }
-            return null;
-        };
 
-        let parseJwt = (token) => {
-            var base64Url = token.split('.')[1];
-            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-            }).join(''));
+            let getCookie = (name) => {
+                var nameEQ = name + "=";
+                var ca = document.cookie.split(';');
+                for(var i=0;i < ca.length;i++) {
+                    var c = ca[i];
+                    while (c.charAt(0)==' ') c = c.substring(1,c.length);
+                    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+                }
+                return null;
+            };
 
-            return JSON.parse(jsonPayload);
-        };
+            let parseJwt = (token) => {
+                var base64Url = token.split('.')[1];
+                var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
 
-        let token = getCookie('auth-token');
+                return JSON.parse(jsonPayload);
+            };
 
-        let payLoad = parseJwt(token);
+            let token = getCookie('auth-token');
 
-        if(payLoad.data.role === 3) {
-            $('.component-comment--input').css('display', 'none');
-            $('.component-comment--content').css('max-height', '225px');
-        }
-        else {
-            $('.component-comment--input').css('display', 'flex');
-            $('.component-comment--content').css('max-height', '210px');
-        }
+            let payLoad = parseJwt(token);
 
-        let parameter = window.location.pathname;
+            if(payLoad.data.role === 3) {
+                $('.component-comment--input').css('display', 'none');
+                $('.component-comment--content').css('max-height', '225px');
+            }
+            else {
+                $('.component-comment--input').css('display', 'flex');
+                $('.component-comment--content').css('max-height', '210px');
+            }
 
-        let paramsPlayerId = parameter.split('/');
+            let parameter = window.location.pathname;
 
-        $.ajax({
-            url: 'http://localhost:3001/player/' + paramsPlayerId[2] + '/statistic',
-            type: 'GET',
-            dataType: 'json',
-            contentType: 'application/json',
-            headers: {
-                'auth-token': token,
-            },
-            success: (data) => {
-                let playerStat = data.data.response[0].statistics[0];
+            let paramsPlayerId = parameter.split('/');
 
-                let playerInfo = data.data.response[0].player;
-                
-                $('#player-stat__nationality').text(playerInfo.nationality);
-                $('#player-stat__age').text(playerInfo.age);
-                $('#player-stat__weight').text(playerInfo.weight);
-                $('#player-stat__height').text(playerInfo.height);
-                $('#player-stat__rating').text(parseFloat(playerStat.games.rating).toFixed(2));
-                $('#player-stat__minutes').text(playerStat.games.minutes);
-                $('#player-stat__yellow-card').text(playerStat.cards.yellow);
-                $('#player-stat__red-card').text(playerStat.cards.red);
+            setCookie('current_player_id', paramsPlayerId[2]);
 
-                $('#player-stat__appearences').text(playerStat.games.appearences);
+            $.ajax({
+                url: 'http://localhost:3001/player/' + paramsPlayerId[2] + '/statistic',
+                type: 'GET',
+                dataType: 'json',
+                contentType: 'application/json',
+                headers: {
+                    'auth-token': token,
+                },
+                success: (data) => {
+                    let playerStat = data.data.response[0].statistics[0];
 
-                const ctx_appearence = document.getElementById('apprearenceChart').getContext('2d');
-                const apprearenceChart = new Chart(ctx_appearence, {
-                    type: 'doughnut',
-                    data: {
-                        labels: [
-                            'Line up',
-                            'Subtitution in',
-                            'Bench',
-                            'Absent'
-                        ],
-                        datasets: [{
-                            data: [playerStat.games.lineups,playerStat.substitutes.in,playerStat.substitutes.bench, GLOBAL_ROUND - playerStat.games.appearences],
-                            backgroundColor: [
-                            'rgb(255, 99, 132)',
-                            'rgb(54, 162, 235)',
-                            'rgb(255, 205, 86)',
-                            'rgb(205, 205, 205)'
+                    let playerInfo = data.data.response[0].player;
+                    
+                    $('#player-stat__nationality').text(playerInfo.nationality);
+                    $('#player-stat__age').text(playerInfo.age);
+                    $('#player-stat__weight').text(playerInfo.weight);
+                    $('#player-stat__height').text(playerInfo.height);
+                    $('#player-stat__rating').text(parseFloat(playerStat.games.rating).toFixed(2));
+                    $('#player-stat__minutes').text(playerStat.games.minutes);
+                    $('#player-stat__yellow-card').text(playerStat.cards.yellow);
+                    $('#player-stat__red-card').text(playerStat.cards.red);
+
+                    $('#player-stat__appearences').text(playerStat.games.appearences);
+
+                    const ctx_appearence = document.getElementById('apprearenceChart').getContext('2d');
+                    const apprearenceChart = new Chart(ctx_appearence, {
+                        type: 'doughnut',
+                        data: {
+                            labels: [
+                                'Line up',
+                                'Subtitution in',
+                                'Bench',
+                                'Absent'
                             ],
-                            hoverOffset: 4
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            legend: {
-                                position: 'right',
-                                labels: {
-                                    font: {
-                                        size: 14,
+                            datasets: [{
+                                data: [playerStat.games.lineups,playerStat.substitutes.in,playerStat.substitutes.bench, GLOBAL_ROUND - playerStat.games.appearences],
+                                backgroundColor: [
+                                'rgb(255, 99, 132)',
+                                'rgb(54, 162, 235)',
+                                'rgb(255, 205, 86)',
+                                'rgb(205, 205, 205)'
+                                ],
+                                hoverOffset: 4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'right',
+                                    labels: {
+                                        font: {
+                                            size: 14,
+                                        }
                                     }
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Appearences',
+                                    font: {
+                                        size: 20,
+                                    },
+                                    align: 'start',
+                                },
+                                layout: {
+                                    autoPadding: false,
+                                    padding: 0
                                 }
                             },
-                            title: {
-                                display: true,
-                                text: 'Appearences',
-                                font: {
-                                    size: 20,
-                                },
-                                align: 'start',
-                            },
-                            layout: {
-                                autoPadding: false,
-                                padding: 0
-                            }
                         },
-                    },
-                });
+                    });
 
-                const ctx_pass = document.getElementById('passChart').getContext('2d');
+                    const ctx_pass = document.getElementById('passChart').getContext('2d');
 
-                let accuracy = playerStat.passes.accuracy * playerStat.games.appearences;
-                let inaccuracy = playerStat.passes.total - accuracy;
-                let accurate = (accuracy/playerStat.passes.total)*100;
+                    let accuracy = playerStat.passes.accuracy * playerStat.games.appearences;
+                    let inaccuracy = playerStat.passes.total - accuracy;
+                    let accurate = (accuracy/playerStat.passes.total)*100;
 
-                $('#player-stat__accurate').text(Math.round(accurate)+'%');
+                    $('#player-stat__accurate').text(Math.round(accurate)+'%');
 
-                const passChart = new Chart(ctx_pass, {
-                    type: 'doughnut',
-                    data: {
-                        labels: [
-                            'Accuracy',
-                            'Inaccuracy',
-                        ],
-                        datasets: [{
-                            data: [accuracy, inaccuracy],
-                            backgroundColor: [
-                            'rgb(64, 218, 0)',
-                            'rgb(255, 66, 92)'
+                    const passChart = new Chart(ctx_pass, {
+                        type: 'doughnut',
+                        data: {
+                            labels: [
+                                'Accuracy',
+                                'Inaccuracy',
                             ],
-                            hoverOffset: 4
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            legend: {
-                                position: 'right',
-                                labels: {
-                                    font: {
-                                        size: 14,
+                            datasets: [{
+                                data: [accuracy, inaccuracy],
+                                backgroundColor: [
+                                'rgb(64, 218, 0)',
+                                'rgb(255, 66, 92)'
+                                ],
+                                hoverOffset: 4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'right',
+                                    labels: {
+                                        font: {
+                                            size: 14,
+                                        }
                                     }
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Accurate',
+                                    font: {
+                                        size: 20,
+                                    },
+                                    align: 'start',
+                                },
+                                layout: {
+                                    autoPadding: false,
+                                    padding: 0
                                 }
                             },
-                            title: {
-                                display: true,
-                                text: 'Accurate',
-                                font: {
-                                    size: 20,
-                                },
-                                align: 'start',
-                            },
-                            layout: {
-                                autoPadding: false,
-                                padding: 0
-                            }
                         },
+                    });
+
+                    let dribbleRate = (playerStat.dribbles.success/playerStat.dribbles.attempts)*100;
+
+                    $('#player-stat__goals').text(playerStat.goals.total);
+                    $('#player-stat__shots').text(playerStat.shots.total);
+                    $('#player-stat__assists').text(playerStat.goals.assists);
+                    $('#player-stat__keypasses').text(playerStat.passes.key);
+                    $('#player-stat__dribbles').text(Math.round(dribbleRate)+'%');
+
+                    let duelRate = (playerStat.duels.won/playerStat.duels.total)*100;
+                    let saves = '';
+
+                    if(playerStat.goals.saves === null) saves = '0'
+
+                    $('#player-stat__fouls').text(playerStat.fouls.drawn);
+                    $('#player-stat__fouled').text(playerStat.fouls.committed);
+                    $('#player-stat__tackles').text(playerStat.tackles.total);
+                    $('#player-stat__duels').text(Math.round(duelRate)+'%');
+                    $('#player-stat__saves').text(saves);
+
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log(textStatus);
+                }
+            });
+
+            //Comment
+            $('.comment-send').click(() => {
+                let comment = $('#comment--input').val();
+                $.ajax({
+                    url: 'http://localhost:3001/coach/' + payLoad.data.member_id + '/comment/' + getCookie('current_player_id'),
+                    type: 'POST',
+                    headers: {
+                        'auth-token': getCookie('auth-token'),
                     },
-                });
-
-                let dribbleRate = (playerStat.dribbles.success/playerStat.dribbles.attempts)*100;
-
-                $('#player-stat__goals').text(playerStat.goals.total);
-                $('#player-stat__shots').text(playerStat.shots.total);
-                $('#player-stat__assists').text(playerStat.goals.assists);
-                $('#player-stat__keypasses').text(playerStat.passes.key);
-                $('#player-stat__dribbles').text(Math.round(dribbleRate)+'%');
-
-                let duelRate = (playerStat.duels.won/playerStat.duels.total)*100;
-                let saves = '';
-
-                if(playerStat.goals.saves === null) saves = '0'
-
-                $('#player-stat__fouls').text(playerStat.fouls.drawn);
-                $('#player-stat__fouled').text(playerStat.fouls.committed);
-                $('#player-stat__tackles').text(playerStat.tackles.total);
-                $('#player-stat__duels').text(Math.round(duelRate)+'%');
-                $('#player-stat__saves').text(saves);
-
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                console.log(textStatus);
-            }
+                    data: {
+                        content: comment,
+                    },
+                    success: (response) => {
+                        let date = new Date(response.data.comment.date_created);
+                        let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                        $('.component-comment--content').append(`
+                            <div class="component-comment--item">
+                                <div class="comment-item--author">
+                                    <span>${response.data.coach}</span>
+                                </div>
+                                <div class="comment-item--message">
+                                    <span>${unescape(response.data.comment.content)}</span>
+                                </div>
+                                <div class="comment-item--date">
+                                    <span>${date.toLocaleDateString("en-US", options)}</span>
+                                </div>
+                            </div>
+                        `);
+                        $('#comment--input').val('');
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        $('#comment--input').val('');
+                        let response = XMLHttpRequest.responseJSON;
+                        alert(response.message);
+                        // window.location = window.location.pathname;
+                    }
+                })
+            })
         });
     </script>
 </body>

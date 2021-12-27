@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const axios = require('axios');
 
 const homeController = require('../controllers/home');
 const middlewares = require('../helpers/middlewares');
@@ -16,13 +15,5 @@ router.get('/lineup', middlewares.checkToken, homeController.lineupSuggestion);
 
 /* GET all players */
 router.get('/players', middlewares.checkToken, homeController.playerManagement);
-
-
-
-
-router.get('/test', (req, res) => {
-    res.render('index');
-});
-
 
 module.exports = router;
