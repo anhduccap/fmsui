@@ -970,3 +970,106 @@
     transform: rotate(360deg);
   }
 } */
+
+/* ------------ Players management page ------------ */
+.content__player-management {
+  display: flex;
+  flex-direction: column;
+  padding-top: 24px;
+}
+
+.player-management__title {
+  font-size: 32px;
+  font-weight: 600;
+  color: rgb(100, 100, 100);
+  margin-bottom: 32px;
+}
+
+.player-management__search-box {
+  display: flex;
+  margin-bottom: 16px;
+  padding: 8px 0 8px 16px;
+  align-items: center;
+}
+
+.player-management__search-box input {
+  padding: 4px 12px;
+  border-radius: 16px;
+  border: 2px solid #999;
+  line-height: 1.5;
+}
+
+.player-management__search-box input:focus {
+  border: 2px solid #555;
+}
+
+.player-management__search-box span {
+  margin: 0 12px;
+  cursor: pointer;
+}
+
+.player-management__player-list {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid #cecece;
+  padding: 24px 0 12px 0;
+  padding-left: 12px;
+  max-height: 725px;
+  overflow-y: scroll;
+  border-radius: 16px;
+}
+
+/* width */
+.player-management__player-list::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+/* Track */
+.player-management__player-list::-webkit-scrollbar-track {
+  background-color: #f5f5f5;
+}
+
+/* Handle */
+.player-management__player-list::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+.player-management__player-list::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.player-management__player-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--color-background-2);
+  padding: 24px 0 16px 0;
+  border-radius: 16px;
+  width: 10%;
+  box-shadow: 0 0.0625rem 0.125rem 0 rgb(0 0 0 / 10%);
+  border-bottom: 2px solid rgb(255, 117, 117);
+  cursor: pointer;
+  margin: 0 18px 24px 18px;
+}
+
+.player-management__player-item:hover {
+  box-shadow: 0 0.0625rem 20px 0 rgb(0 0 0 / 5%);
+  transform: translateY(-0.0625rem);
+}
+
+.player-item__image {
+  border-radius: 8px;
+  width: 75%;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.player-item__name {
+  font-weight: 600;
+}
+
+.player-item__position {
+  font-size: 15px;
+}

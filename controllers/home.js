@@ -1,4 +1,5 @@
 const axios = require('axios');
+const jwt = require('jsonwebtoken');
 
 exports.homepage = async (req, res, next) => {
     let getUser = new Promise((resolve, reject) => {
@@ -77,6 +78,7 @@ exports.homepage = async (req, res, next) => {
         // console.log(response[1].response[0].league.standings[0]);
         // console.log(response[2].response[0]);
         // console.log(standings)
+        // console.log(response[0]);
         return res.render('home', {member: response[0], standings: standings, nextMatch: nextMatch});
     })
     .catch(err => {
@@ -88,34 +90,7 @@ exports.getPlayerStat = async (req, res) => {
     let getPlayer = new Promise((resolve, reject) => {
         axios({
             method: 'GET',
-            url: process.env.API_URL + '/player/' + req.member_id + '/info',
-            headers: {
-                'auth-token': req.cookies['auth-token'],
-            }
-        })
-        .then( response => resolve(response.data))
-        .catch(err => reject(err));
-    });
-    let getStanding = new Promise((resolve, reject) => {
-        axios({
-            method: 'GET',
-            url: 'https://' + process.env.EXTERNAL_API + '/standings',
-            params: {
-                league: '39',
-                season: '2021'
-            },
-            headers: {
-                'x-rapidapi-host': process.env.EXTERNAL_API,
-                'x-rapidapi-key': process.env.API_SECRET_KEY
-            }
-        })
-        .then( response => resolve(response.data))
-        .catch(err => reject(err));
-    });
-    let getStat = new Promise((resolve, reject) => {
-        axios({
-            method: 'GET',
-            url: process.env.API_URL + '/player/' + req.member_id + '/statistic',
+            url: process.env.API_URL + '/player/' + req.params.player_id + '/info',
             headers: {
                 'auth-token': req.cookies['auth-token'],
             }
@@ -127,36 +102,30 @@ exports.getPlayerStat = async (req, res) => {
     let getComment = new Promise((resolve, reject) => {
         axios({
             method: 'GET',
-            url: process.env.API_URL + '/player/' + req.member_id + '/comment',
+            url: process.env.API_URL + '/player/' + req.params.player_id + '/comment',
             headers: {
                 'auth-token': req.cookies['auth-token'],
             }
         })
         .then( response => resolve(response.data))
-        .catch(err => reject(err));
+        .catch(err => resolve(err));
     })
 
     await Promise.all([getPlayer, getComment])
     .then(response => {
-        // console.log(response[1].response[0].league)
-        // let standings = response[1].response[0].league.standings[0];
-        // let round = standings.find(clb => clb.team.id === 33);
-
-
         let data = {
             player: response[0].data,
-            comment: response[1].data,
-            // stat: response[2].data.response[0],
-            // round: round.all.played,
+            comment: [],
         };
 
-        // console.log(data);
+        if (response[1].code === 200) {
+            data.comment = response[1].data;
+        }
 
         return res.render('player_stat', {data: data});
     })
     .catch(err => {
-        console.log(err.data.message);
-        return res.render('player_stat', {data: null});
+        console.log(err);
     });
 }
 
@@ -170,8 +139,19 @@ exports.lineupSuggestion = async (req, res) => {
     })
     .then( response => {
         let lineupSuggestion = response.data.data;
-        console.log(lineupSuggestion)
+        // console.log(lineupSuggestion)
         return res.render('lineup_suggestion', {lineup: lineupSuggestion});
     })
     .catch(err => console.log(err));
+}
+
+exports.playerManagement = async (req, res) => {
+    let payLoad = jwt.decode(req.cookies['auth-token'], process.env.JWT_SECRET_KEY);
+
+    if(payLoad.data.role === 3) {
+        return res.redirect('/');
+    }
+    else {
+        return res.render('player_management');
+    }
 }

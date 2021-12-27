@@ -361,8 +361,12 @@
             $('.component-comment--content').css('max-height', '210px');
         }
 
+        let parameter = window.location.pathname;
+
+        let paramsPlayerId = parameter.split('/');
+
         $.ajax({
-            url: 'http://localhost:3001/player/' + payLoad.data.member_id + '/statistic',
+            url: 'http://localhost:3001/player/' + paramsPlayerId[2] + '/statistic',
             type: 'GET',
             dataType: 'json',
             contentType: 'application/json',

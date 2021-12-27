@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/stylesheets/base.css">
     <link rel="stylesheet" href="/stylesheets/main.css">
     <link rel="icon" href="/images/logo.png">
-    <title>Player Management Page</title>
+    <title>Document</title>
 </head>
 <body>
     <div class="app">
@@ -88,7 +88,7 @@
                             <div class="sub-menu">
                                 <ul class="sub-menu-list">
                                     <li class="sub-menu-item">
-                                        <a href="/auth" class="sub-menu-link">
+                                        <a href="" class="sub-menu-link">
                                             <span class="material-icons">logout</span>
                                             <p>Logout</p>
                                         </a>
@@ -98,26 +98,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-10">
+                    <div class="col-8 col-md-7">
                         <div class="main-content">
-                            <div class="content__player-management">
-                                <div class="player-management__title">
-                                    <span>Player management</span>
-                                </div>
-                                <div class="player-management__search-box">
-                                    <input id="searchStatInput" type="text" placeholder="Search..">
-                                    <!-- <span class="material-icons">search</span> -->
-                                </div>
-                                <div class="player-management__player-list">
-                                    <!-- <div class="player-management__player-item">
-                                        <div class="player-item__image">
-                                            <img src="" onerror="this.src='/images/avatar_test.jpg'" alt="">
-                                        </div>
-                                        <div class="player-item__name"></div>
-                                        <div class="player-item__position"></div>
-                                    </div> -->
-                                </div>
-                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col-4 col-md-3">
+                        <div class="sub-content">
+                            
                         </div>
                     </div>
                 </div>
@@ -128,77 +116,5 @@
     <!-- -------------------- -->
     <!-- Boostrap javascript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
-        $(document).ready(() =>{
-            let getCookie = (name) => {
-                var nameEQ = name + "=";
-                var ca = document.cookie.split(';');
-                for(var i=0;i < ca.length;i++) {
-                    var c = ca[i];
-                    while (c.charAt(0)==' ') c = c.substring(1,c.length);
-                    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-                }
-                return null;
-            };
-
-            $.ajax({
-                url: 'http://localhost:3001/coach/statistic',
-                type: 'GET',
-                dataType: 'json',
-                contentType: 'application/json',
-                headers: {
-                    'auth-token': getCookie('auth-token'),
-                },
-                success: (data) => {
-                    let html = '';
-                    let playerList = data.data;
-                    playerList.forEach( player => {
-                        html += `
-                            <a class="player-management__player-item" href="/stat/${player.player._id}">
-                                <div class="player-item__image">
-                                    <img src="${player.player.photo}" onerror="this.src='/images/avatar_test.jpg'" alt="">
-                                </div>
-                                <div class="player-item__name">
-                                    <span>${player.player.name}</span>    
-                                </div>
-                                <div class="player-item__position">
-                                    <span>${player.player.position}</span>       
-                                </div>
-                            </a>
-                        `;
-                    });
-
-                    $('.player-management__player-list').html(html);
-
-                    $('#searchStatInput').on('keyup', () => {
-                        $('.player-management__player-list').html('');
-                        let value = $('#searchStatInput').val().toLowerCase();
-
-                        if(value === '' || value === undefined || value === null) {
-                            $('.player-management__player-list').html(html);
-                        } else {
-                            let matchList = playerList.filter( player => player.player.name.toLowerCase().indexOf(value) > -1);
-                            matchList.forEach( player => {
-                                $('.player-management__player-list').append(`
-                                    <a class="player-management__player-item" href="/stat/${player.player._id}">
-                                        <div class="player-item__image">
-                                            <img src="${player.player.photo}" onerror="this.src='/images/avatar_test.jpg'" alt="">
-                                        </div>
-                                        <div class="player-item__name">
-                                            <span>${player.player.name}</span>    
-                                        </div>
-                                        <div class="player-item__position">
-                                            <span>${player.player.position}</span>       
-                                        </div>
-                                    </a>
-                                `);
-                            });
-                        }
-                    });
-                }
-            });
-        });
-    </script>
 </body>
 </html>
