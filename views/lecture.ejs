@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/reset.css">
+    <link rel="stylesheet" href="/stylesheets/base.css">
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <link rel="icon" href="/images/logo.png">
+    <title>Lecture management</title>
+</head>
+<body>
+    <div class="app">
+        <div class="container-fluid">
+            <div class="content">
+                <div class="row g-0">
+                    <div class="d-none d-md-block col-md-2">
+                        <div class="navbar">
+                            <div class="logo">
+                                <img src="/images/logo.png" alt="logo">
+                                <p>MANCHESTER UNITED</p>
+                            </div>
+                            <div class="main-menu">
+                                <ul class="menu-list">
+                                    <li class="menu-item">
+                                        <a href="/" class="menu-link">
+                                            <span class="material-icons">space_dashboard</span>
+                                            <p>Dashboard</p>
+                                        </a>
+                                    </li>
+                                    <% if (user.role === 3) { %> 
+                                        <li class="menu-item">
+                                            <a href="/stat/<%= user.id %>" class="menu-link">
+                                                <span class="material-icons">poll</span>
+                                                <p>Statistics</p>
+                                            </a>
+                                        </li>
+                                    <% } else { %>
+                                        <li class="menu-item">
+                                            <a href="/players" class="menu-link" id="player-stat-link">
+                                                <span class="material-icons">poll</span>
+                                                <p>Management</p>
+                                            </a>
+                                        </li>
+                                    <% } %> 
+                                    <li class="menu-item">
+                                        <a href="" class="menu-link">
+                                            <span class="material-icons">event</span>
+                                            <p>Events</p>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item menu-item--active">
+                                        <a href="/lecture" class="menu-link menu-link--active">
+                                            <span class="material-icons">text_snippet</span>
+                                            <p>Lectures</p>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="" class="menu-link">
+                                            <span class="material-icons">notifications</span>
+                                            <p>Announcements</p>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="" class="menu-link">
+                                            <span class="material-icons">account_circle</span>
+                                            <p>Personal</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="sponsors">
+                                <div class="sponsors__title">
+                                    <p>Sponsors</p>
+                                    <div class="title-sub"></div>
+                                </div>
+                                <ul class="sponsor-list">
+                                    <li class="sponsor-item">
+                                        <img src="/images/sponsor_adidas.png" alt="" height="45px">
+                                    </li>
+                                    <li class="sponsor-item">
+                                        <img src="/images/sponsor_teamviewer.png" alt="" height="35px">
+                                    </li>
+                                    <li class="sponsor-item">
+                                        <img src="/images/sponsor_kohler.png" alt="" height="20px">
+                                    </li>
+                                </ul>
+                                <div class="sponsors__divider"></div>
+                            </div>
+                            <div class="sub-menu">
+                                <ul class="sub-menu-list">
+                                    <li class="sub-menu-item">
+                                        <a href="/auth" class="sub-menu-link">
+                                            <span class="material-icons">logout</span>
+                                            <p>Logout</p>
+                                        </a>
+                                        
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-10">
+                        <div class="main-content">
+                            <div class="content__lecture-modal">
+                                <div class="lecture-management__view-box">
+                                    <!-- <div class="lecture-view-box__header">
+                                        <div class="lecture-view-box__title">
+                                            <span>Lecture Detail</span>
+                                            <div class="lecture-view-box__close-btn">
+                                                <span class="material-icons">highlight_off</span>
+                                            </div>
+                                        </div>
+                                        <div class="lecture-view-box__sub-title">
+                                            <div class="lecture-view-box__author">
+                                                <span class="material-icons">person</span>
+                                                <span>Alex Smith</span>
+                                            </div>
+                                            <div class="lecture-view-box__category">
+                                                <span class="material-icons">local_offer</span>
+                                                <span>Technique</span>
+                                            </div>
+                                            <div class="lecture-view-box__date">
+                                                <span class="material-icons">schedule</span>
+                                                <span>Monday, September 1 2021</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="lecture-view-box__content">
+                                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum ad libero, veniam maxime beatae qui enim esse corporis, eaque numquam ea voluptatem molestias officiis illo architecto rerum similique voluptas eligendi.
+                                    </div> -->
+                                </div>
+                                <div class="lecture-management__create-box">
+                                    <div class="lecture-create-box__title">
+                                        <span>Lecture Detail</span>
+                                    </div>
+                                    <div class="lecture-create-box__content">
+                                        <div class="lecture-create-box__lecture-title">
+                                            <label for="lecture-title">Title</label>
+                                            <input type="text" id="lecture-title">
+                                        </div>
+                                        <div class="lecture-create-box__lecture-category">
+                                            <span>Category</span>
+                                            <div>
+                                                <input type="radio" name="lecture-category" id="category-technique" value="Technique">
+                                                <label for="category-technique">Technique</label>
+                                            </div>
+                                            <div>
+                                                <input type="radio" name="lecture-category" id="category-softskill" value="Soft skill">
+                                                <label for="softskill">Soft skill</label>
+                                            </div>
+                                            <div>
+                                                <input type="radio" name="lecture-category" id="category-other" value="Other">
+                                                <label for="category-other">Other</label>
+                                            </div>
+                                        </div>
+                                        <div class="lecture-create-box__lecture-content">
+                                            <label for="lecture-content">Content</label>
+                                            <textarea id="lecture-content"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="lecture-create-box__button">
+                                        <div class="lecture-create-box__create-btn">
+                                            <span>Create</span>
+                                        </div>
+                                        <div class="lecture-create-box__update-btn" style="display: none;">
+                                            <span>Update</span>
+                                        </div>
+                                        <div class="lecture-create-box__cancel-btn">
+                                            <span>Cancel</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content__lecture-management">
+                                <div class="lecture-management__title">
+                                    <span>Lecture Management</span>
+                                </div>
+                                <div class="lecture-management__search-box">
+                                    <input id="searchLectureInput" type="text" placeholder="Search..">
+                                    <% if(user.role !== 3) { %> 
+                                        <div class="lecture-management__create">
+                                            <span class="material-icons">add_circle</span>
+                                            <span class="create-lecture__label">Add</span>
+                                        </div>
+                                    <% } %> 
+                                </div>
+                                <div class="lecture-management__lecture-list">
+                                    <!-- <div class="lecture-management__lecture-item">
+                                        <div class="lecture-item__title">
+                                            <span>Tactical mindset</span>
+                                        </div>
+                                        <div class="lecture-item__author">
+                                            <span>Admin</span>
+                                        </div>
+                                        <div class="lecture-item__category">
+                                            <span>Work</span>
+                                        </div>
+                                        <div class="lecture-item__function">
+                                            <div class="function__edit-lecture">
+                                                <span class="material-icons">edit</span>
+                                            </div>
+                                            <div class="function__edit-lecture">
+                                                <span class="material-icons">delete</span>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- -------------------- -->
+    <!-- Boostrap javascript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(document).ready(() => {
+            let getCookie = (name) => {
+                var nameEQ = name + "=";
+                var ca = document.cookie.split(';');
+                for(var i=0;i < ca.length;i++) {
+                    var c = ca[i];
+                    while (c.charAt(0)==' ') c = c.substring(1,c.length);
+                    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+                }
+                return null;
+            };
+
+            let parseJwt = (token) => {
+                var base64Url = token.split('.')[1];
+                var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
+
+                return JSON.parse(jsonPayload);
+            };
+
+            let payLoad = parseJwt(getCookie('auth-token'));
+
+            $.ajax({
+                url: 'http://localhost:3001/coach/' + payLoad.data.member_id + '/lectures',
+                type: 'GET',
+                dataType: 'json',
+                contentType: 'application/json',
+                headers: {
+                    'auth-token': getCookie('auth-token'),
+                },
+                success: (response) => {
+                    let lectureList = response.data;
+
+                    let html = '';
+
+                    
+                    if(payLoad.data.role !== 3) {
+                        lectureList.forEach((lecture) => {
+                            html += `
+                                <div class="lecture-management__lecture-item" id="${lecture._id}">
+                                    <div class="lecture-item__title" id="view-lec-${lecture._id}"">
+                                            <span>${unescape(lecture.title)}</span>
+                                    </div>
+                                    <div class="lecture-item__author">
+                                        <span>${unescape(lecture.author.name)}</span>
+                                    </div>
+                                    <div class="lecture-item__category">
+                                        <span>${unescape(lecture.category)}</span>
+                                    </div>
+                                    <div class="lecture-item__function">
+                                        <div class="function__edit-lecture" id="edit-lec-${lecture._id}">
+                                            <span class="material-icons">edit</span>
+                                        </div>
+                                        <div class="function__delete-lecture" id="del-lec-${lecture._id}">
+                                            <span class="material-icons">delete</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                    } else {
+                        lectureList.forEach((lecture) => {
+                            html += `
+                                <div class="lecture-management__lecture-item" id="${lecture._id}">
+                                    <div class="lecture-item__title" id="view-lec-${lecture._id}"">
+                                            <span>${unescape(lecture.title)}</span>
+                                    </div>
+                                    <div class="lecture-item__author">
+                                        <span>${unescape(lecture.author.name)}</span>
+                                    </div>
+                                    <div class="lecture-item__category">
+                                        <span>${unescape(lecture.category)}</span>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                    }
+                    $('.lecture-management__lecture-list').html(html);
+
+                    $('#searchLectureInput').on('keyup', () => {
+                        $('.lecture-management__lecture-list').html('');
+                        let value = $('#searchLectureInput').val().toLowerCase();
+
+                        if(value === '' || value === undefined || value === null) {
+                            $('.lecture-management__lecture-list').html(html);
+                        } else {
+                            let matchList = lectureList.filter( lecture => lecture.title.toLowerCase().indexOf(value) > -1);
+
+                            if(payLoad.data.role !== 3) {
+                                matchList.forEach( lecture => {
+                                    $('.lecture-management__lecture-list').append(`
+                                        <div class="lecture-management__lecture-item" id="${lecture._id}">
+                                            <div class="lecture-item__title" id="view-lec-${lecture._id}"">
+                                                    <span>${unescape(lecture.title)}</span>
+                                            </div>
+                                            <div class="lecture-item__author">
+                                                <span>${unescape(lecture.author.name)}</span>
+                                            </div>
+                                            <div class="lecture-item__category">
+                                                <span>${unescape(lecture.category)}</span>
+                                            </div>
+                                            <div class="lecture-item__function">
+                                                <div class="function__edit-lecture" id="edit-lec-${lecture._id}">
+                                                    <span class="material-icons">edit</span>
+                                                </div>
+                                                <div class="function__delete-lecture" id="del-lec-${lecture._id}">
+                                                    <span class="material-icons">delete</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `);
+                                });
+                            } else {
+                                matchList.forEach( lecture => {
+                                    $('.lecture-management__lecture-list').append(`
+                                        <div class="lecture-management__lecture-item" id="${lecture._id}">
+                                            <div class="lecture-item__title" id="view-lec-${lecture._id}"">
+                                                    <span>${unescape(lecture.title)}</span>
+                                            </div>
+                                            <div class="lecture-item__author">
+                                                <span>${unescape(lecture.author.name)}</span>
+                                            </div>
+                                            <div class="lecture-item__category">
+                                                <span>${unescape(lecture.category)}</span>
+                                            </div>
+                                        </div>
+                                    `);
+                                });
+                            }
+                            
+                        }
+                    });
+
+                },
+                error: (XMLHttpRequest, textStatus, errorThrown) => {
+                    let response = XMLHttpRequest.responseJSON;
+                    alert(response.message);
+                }
+            });
+
+            $(document).on("click",".function__delete-lecture", function () {
+                let lectureID = $(this).attr('id');
+                lectureID = lectureID.split('-')[2];
+                if(confirm("Are you sure you want to delete?")) {
+                    $.ajax({
+                        url: 'http://localhost:3001/coach/' + payLoad.data.member_id + '/lecture/' + lectureID,
+                        type: 'DELETE',
+                        headers: {
+                            'auth-token': getCookie('auth-token'),
+                        },
+                        success: (response) => {
+                            location.reload();
+                        },
+                        error: (XMLHttpRequest, textStatus, errorThrown) => {
+                            let response = XMLHttpRequest.responseJSON;
+                            console.log(response);
+                            alert(response.message);
+                        }
+                    });
+                }
+            });
+
+            $(document).on('click', '.lecture-item__title', function () {
+                let lectureID = $(this).attr('id');
+                lectureID = lectureID.split('-')[2];
+                $('.content__lecture-modal').css('display', 'flex');
+            });
+
+            $(document).on("click",".function__edit-lecture", function () {
+                let lectureID = $(this).attr('id');
+                lectureID = lectureID.split('-')[2];
+                $('.content__lecture-modal').css('display', 'flex');
+                $('.lecture-management__create-box').css('display', 'flex');
+                $('.lecture-create-box__update-btn').css('display', 'flex');
+                $('.lecture-create-box__create-btn').css('display', 'none');
+
+                $.ajax({
+                    url: 'http://localhost:3001/coach/' + payLoad.data.member_id + '/lecture/' + lectureID,
+                    type: 'GET',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    headers: {
+                        'auth-token': getCookie('auth-token'),
+                    },
+                    success: (response) => {
+                        $('#lecture-title').val(unescape(response.data.title));
+                        $('#lecture-content').val(unescape(response.data.content));
+                    },
+                    error: (XMLHttpRequest, textStatus, errorThrown) => {
+                        let response = XMLHttpRequest.responseJSON;
+                        alert(response.message);
+                    }
+                });
+
+                $('.lecture-create-box__update-btn').click(() => {
+                    let title = $('#lecture-title').val();
+                    let content = $('#lecture-content').val();
+                    let category = $('input[name="lecture-category"]:checked').val();
+
+                    $.ajax({
+                        url: 'http://localhost:3001/coach/' + payLoad.data.member_id + '/lecture/' + lectureID,
+                        type: 'PUT',
+                        headers: {
+                            'auth-token': getCookie('auth-token'),
+                        },
+                        data: {
+                            title: title,
+                            content: content,
+                            category: category
+                        },
+                        success: (data) => {
+                            location.reload();
+                        },
+                        error: (XMLHttpRequest, textStatus, errorThrown) => {
+                            let response = XMLHttpRequest.responseJSON;
+                            alert(response.message);
+                        }
+                    });
+                })
+            });
+
+            $(document).on("click",".lecture-item__title", function (){
+                let lectureID = $(this).attr('id');
+                lectureID = lectureID.split('-')[2];
+                $('.content__lecture-modal').css('display', 'flex');
+                $('.lecture-management__view-box').css('display', 'flex');
+
+                $.ajax({
+                    url: 'http://localhost:3001/coach/' + payLoad.data.member_id + '/lecture/' + lectureID,
+                    type: 'GET',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    headers: {
+                        'auth-token': getCookie('auth-token'),
+                    },
+                    success: (response) => {
+
+                        let date = new Date(response.data.date_created);
+                        let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
+                        $('.lecture-management__view-box').html(`
+                            <div class="lecture-view-box__header">
+                                <div class="lecture-view-box__title">
+                                    <span>${unescape(response.data.title)}</span>
+                                    <div class="lecture-view-box__close-btn">
+                                        <span class="material-icons">highlight_off</span>
+                                    </div>
+                                </div>
+                                <div class="lecture-view-box__sub-title">
+                                    <div class="lecture-view-box__author">
+                                        <span class="material-icons">person</span>
+                                        <span>${response.data.author.name}</span>
+                                    </div>
+                                    <div class="lecture-view-box__category">
+                                        <span class="material-icons">local_offer</span>
+                                        <span>${unescape(response.data.category)}</span>
+                                    </div>
+                                    <div class="lecture-view-box__date">
+                                        <span class="material-icons">schedule</span>
+                                        <span>${date.toLocaleDateString("en-US", options)}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lecture-view-box__content">${unescape(response.data.content)}</div>
+                        `);
+                    },
+                    error: (XMLHttpRequest, textStatus, errorThrown) => {
+                        let response = XMLHttpRequest.responseJSON;
+                        alert(response.message);
+                    }
+                });
+            });
+
+            $(document).on("click",".lecture-view-box__close-btn", function (){
+                $('.content__lecture-modal').css('display', 'none');
+                $('.lecture-management__view-box').css('display', 'none');
+            });
+
+            $('.lecture-management__create').click(() => {
+                $('.content__lecture-modal').css('display', 'flex');
+                $('.lecture-management__create-box').css('display', 'flex');
+            });
+
+            $('.lecture-create-box__cancel-btn').click(() => {
+                $('.content__lecture-modal').css('display', 'none');
+                $('.lecture-management__create-box').css('display', 'none');
+            });
+
+            $('.lecture-create-box__create-btn').click(() => {
+                let title = $('#lecture-title').val();
+                let content = $('#lecture-content').val();
+                let category = $('input[name="lecture-category"]:checked').val();
+
+                $.ajax({
+                    url: 'http://localhost:3001/coach/' + payLoad.data.member_id + '/lecture',
+                    type: 'POST',
+                    headers: {
+                        'auth-token': getCookie('auth-token'),
+                    },
+                    data: {
+                        title: title,
+                        content: content,
+                        category: category
+                    },
+                    success: (data) => {
+                        $('.content__lecture-modal').css('display', 'none');
+                        $('.lecture-management__create-box').css('display', 'none');
+
+                        if(payLoad.data.role !== 3) {
+                            $('.lecture-management__lecture-list').prepend(`
+                                <div class="lecture-management__lecture-item" id="${data.data.lecture._id}">
+                                    <div class="lecture-item__title" id="view-lec-${data.data.lecture._id}">
+                                            <span>${unescape(data.data.lecture.title)}</span>
+                                    </div>
+                                    <div class="lecture-item__author">
+                                        <span>${unescape(data.data.author.name)}</span>
+                                    </div>
+                                    <div class="lecture-item__category">
+                                        <span>${unescape(data.data.lecture.category)}</span>
+                                    </div>
+                                    <div class="lecture-item__function">
+                                        <div class="function__edit-lecture">
+                                            <span class="material-icons">edit</span>
+                                        </div>
+                                        <div class="function__delete-lecture" id="del-lec-${data.data.lecture._id}">
+                                            <span class="material-icons">delete</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            `);
+                        } else {
+                            $('.lecture-management__lecture-list').prepend(`
+                                <div class="lecture-management__lecture-item" id="${data.data.lecture._id}">
+                                    <div class="lecture-item__title" id="view-lec-${data.data.lecture._id}">
+                                            <span>${unescape(data.data.lecture.title)}</span>
+                                    </div>
+                                    <div class="lecture-item__author">
+                                        <span>${unescape(data.data.author.name)}</span>
+                                    </div>
+                                    <div class="lecture-item__category">
+                                        <span>${unescape(data.data.lecture.category)}</span>
+                                    </div>
+                                </div>
+                            `);
+                        }
+
+                        
+
+                        $('#lecture-title').val('');
+                        $('#lecture-content').val('');
+                        $('input[name="lecture-category"]:checked').val('');
+                    },
+                    error: (XMLHttpRequest, textStatus, errorThrown) => {
+                        let response = XMLHttpRequest.responseJSON;
+                        alert(response.message);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

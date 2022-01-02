@@ -165,3 +165,11 @@ exports.playerManagement = async (req, res) => {
         return res.render('player_management');
     }
 }
+
+exports.lectureManagement = async (req, res) => {
+    let user = {
+        role: req.role,
+        id: req.member_id,
+    };
+    return res.render('lecture', { user: user});
+}

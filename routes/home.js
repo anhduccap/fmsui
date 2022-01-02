@@ -16,4 +16,7 @@ router.get('/lineup', middlewares.checkToken, homeController.lineupSuggestion);
 /* GET all players */
 router.get('/players', middlewares.checkToken, homeController.playerManagement);
 
+/* GET lectures */
+router.get('/lectures', middlewares.checkToken, homeController.lectureManagement);
+
 module.exports = router;
