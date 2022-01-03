@@ -173,3 +173,11 @@ exports.lectureManagement = async (req, res) => {
     };
     return res.render('lecture', { user: user});
 }
+
+exports.announcementManagement = async (req, res) => {
+    let user = {
+        role: req.role,
+        id: req.member_id,
+    };
+    return res.render('announcement', { user: user});
+}

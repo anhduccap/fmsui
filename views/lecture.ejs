@@ -51,9 +51,9 @@
                                         </li>
                                     <% } %> 
                                     <li class="menu-item">
-                                        <a href="" class="menu-link">
+                                        <a href="/lineup" class="menu-link">
                                             <span class="material-icons">event</span>
-                                            <p>Events</p>
+                                            <p>Line up</p>
                                         </a>
                                     </li>
                                     <li class="menu-item menu-item--active">
@@ -109,7 +109,7 @@
                     </div>
                     <div class="col-12 col-md-10">
                         <div class="main-content">
-                            <div class="content__lecture-modal">
+                            <div class="content__modal">
                                 <div class="lecture-management__view-box">
                                     <!-- <div class="lecture-view-box__header">
                                         <div class="lecture-view-box__title">
@@ -166,14 +166,14 @@
                                             <textarea id="lecture-content"></textarea>
                                         </div>
                                     </div>
-                                    <div class="lecture-create-box__button">
-                                        <div class="lecture-create-box__create-btn">
+                                    <div class="create-box__button">
+                                        <div class="create-box__create-btn">
                                             <span>Create</span>
                                         </div>
-                                        <div class="lecture-create-box__update-btn" style="display: none;">
+                                        <div class="create-box__update-btn" style="display: none;">
                                             <span>Update</span>
                                         </div>
-                                        <div class="lecture-create-box__cancel-btn">
+                                        <div class="create-box__cancel-btn">
                                             <span>Cancel</span>
                                         </div>
                                     </div>
@@ -393,16 +393,16 @@
             $(document).on('click', '.lecture-item__title', function () {
                 let lectureID = $(this).attr('id');
                 lectureID = lectureID.split('-')[2];
-                $('.content__lecture-modal').css('display', 'flex');
+                $('.content__modal').css('display', 'flex');
             });
 
             $(document).on("click",".function__edit-lecture", function () {
                 let lectureID = $(this).attr('id');
                 lectureID = lectureID.split('-')[2];
-                $('.content__lecture-modal').css('display', 'flex');
+                $('.content__modal').css('display', 'flex');
                 $('.lecture-management__create-box').css('display', 'flex');
-                $('.lecture-create-box__update-btn').css('display', 'flex');
-                $('.lecture-create-box__create-btn').css('display', 'none');
+                $('.create-box__update-btn').css('display', 'flex');
+                $('.create-box__create-btn').css('display', 'none');
 
                 $.ajax({
                     url: 'http://localhost:3001/coach/' + payLoad.data.member_id + '/lecture/' + lectureID,
@@ -422,7 +422,7 @@
                     }
                 });
 
-                $('.lecture-create-box__update-btn').click(() => {
+                $('.create-box__update-btn').click(() => {
                     let title = $('#lecture-title').val();
                     let content = $('#lecture-content').val();
                     let category = $('input[name="lecture-category"]:checked').val();
@@ -452,7 +452,7 @@
             $(document).on("click",".lecture-item__title", function (){
                 let lectureID = $(this).attr('id');
                 lectureID = lectureID.split('-')[2];
-                $('.content__lecture-modal').css('display', 'flex');
+                $('.content__modal').css('display', 'flex');
                 $('.lecture-management__view-box').css('display', 'flex');
 
                 $.ajax({
@@ -502,21 +502,21 @@
             });
 
             $(document).on("click",".lecture-view-box__close-btn", function (){
-                $('.content__lecture-modal').css('display', 'none');
+                $('.content__modal').css('display', 'none');
                 $('.lecture-management__view-box').css('display', 'none');
             });
 
             $('.lecture-management__create').click(() => {
-                $('.content__lecture-modal').css('display', 'flex');
+                $('.content__modal').css('display', 'flex');
                 $('.lecture-management__create-box').css('display', 'flex');
             });
 
-            $('.lecture-create-box__cancel-btn').click(() => {
-                $('.content__lecture-modal').css('display', 'none');
+            $('.create-box__cancel-btn').click(() => {
+                $('.content__modal').css('display', 'none');
                 $('.lecture-management__create-box').css('display', 'none');
             });
 
-            $('.lecture-create-box__create-btn').click(() => {
+            $('.create-box__create-btn').click(() => {
                 let title = $('#lecture-title').val();
                 let content = $('#lecture-content').val();
                 let category = $('input[name="lecture-category"]:checked').val();
@@ -533,7 +533,7 @@
                         category: category
                     },
                     success: (data) => {
-                        $('.content__lecture-modal').css('display', 'none');
+                        $('.content__modal').css('display', 'none');
                         $('.lecture-management__create-box').css('display', 'none');
 
                         if(payLoad.data.role !== 3) {

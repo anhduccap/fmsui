@@ -19,4 +19,7 @@ router.get('/players', middlewares.checkToken, homeController.playerManagement);
 /* GET lectures */
 router.get('/lectures', middlewares.checkToken, homeController.lectureManagement);
 
+/* GET lectures */
+router.get('/announcements', middlewares.checkToken, homeController.announcementManagement);
+
 module.exports = router;

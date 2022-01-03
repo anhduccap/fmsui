@@ -44,23 +44,23 @@
                                     <li class="menu-item">
                                         <a href="/players" class="menu-link" id="player-stat-link">
                                             <span class="material-icons">poll</span>
-                                            <p>Management</p>
+                                            <p>Players</p>
                                         </a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="" class="menu-link">
+                                        <a href="/lineup" class="menu-link">
                                             <span class="material-icons">event</span>
                                             <p>Line up</p>
                                         </a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="" class="menu-link">
+                                        <a href="/lectures" class="menu-link">
                                             <span class="material-icons">text_snippet</span>
                                             <p>Lectures</p>
                                         </a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="" class="menu-link">
+                                        <a href="/announcements" class="menu-link">
                                             <span class="material-icons">notifications</span>
                                             <p>Announcements</p>
                                         </a>
@@ -161,109 +161,38 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="content--lecture">
-                                <div class="lecture--header">
-                                    <div class="lecture--header-title">
-                                        <span>Lectures</span>
+                            <div class="dashboard__footer">
+                                <div class="content__top-score">
+                                    <div class="top-score__header">
+                                        <div class="top-score__title">
+                                            <span>EPL Top Score</span>
+                                        </div>
                                     </div>
-                                    <a href="" class="lecture--header-button">
-                                        <span>See all</span>
-                                        <span class="material-icons">navigate_next</span>
-                                    </a>
+                                    <div class="top-score__list">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Name</th>
+                                                    <th>Team</th>
+                                                    <th>Games</th>
+                                                    <th>Goals</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="top-score-data">
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                                <div class="lecture--list">
-                                    <div class="lecture--item">
-                                        <div class="lecture--item-header">
-                                            <div class="item-header--img">
-                                                <img src="" onerror="this.src='/images/lecture.jpg'" alt="">
-                                            </div>
-                                            <div class="item-header--title">
-                                                <span>Communication</span>
-                                                <div class="item-header--author">
-                                                    <span class="material-icons">person_outline</span>
-                                                    <span>Ms. Alice</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="lecture--item-content">
-                                            <div class="lecture-time">
-                                                <span class="material-icons">query_builder</span>
-                                                <span>20:00 - 22:00</span>
-                                            </div>
-                                            <div class="lecture-start-date">
-                                                <span class="material-icons">flag</span>
-                                                <span>Dec 1, 2021</span>
-                                            </div>
-                                            <div class="lecture-room">
-                                                <span class="material-icons">school</span>
-                                                <span>Room: kgirjs</span>
-                                            </div>
-                                        </div>
-                                        <div class="lecture--detail-btn">
-                                            <a href="">Lecture detail</a>
+                                <div class="content__home-ancm">
+                                    <div class="top-score__header">
+                                        <div class="top-score__title">
+                                            <span>Announcements</span>
                                         </div>
                                     </div>
-                                    <div class="lecture--item">
-                                        <div class="lecture--item-header">
-                                            <div class="item-header--img">
-                                                <img src="" onerror="this.src='/images/lecture.jpg'" alt="">
-                                            </div>
-                                            <div class="item-header--title">
-                                                <span>Advanced English</span>
-                                                <div class="item-header--author">
-                                                    <span class="material-icons">person_outline</span>
-                                                    <span>Mr. John</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="lecture--item-content">
-                                            <div class="lecture-time">
-                                                <span class="material-icons">query_builder</span>
-                                                <span>20:00 - 22:00</span>
-                                            </div>
-                                            <div class="lecture-start-date">
-                                                <span class="material-icons">flag</span>
-                                                <span>Jan 1, 2022</span>
-                                            </div>
-                                            <div class="lecture-room">
-                                                <span class="material-icons">school</span>
-                                                <span>Room: ilp1ta</span>
-                                            </div>
-                                        </div>
-                                        <div class="lecture--detail-btn">
-                                            <a href="">Lecture detail</a>
-                                        </div>
-                                    </div>
-                                    <div class="lecture--item">
-                                        <div class="lecture--item-header">
-                                            <div class="item-header--img">
-                                                <img src="" onerror="this.src='/images/lecture.jpg'" alt="">
-                                            </div>
-                                            <div class="item-header--title">
-                                                <span>Tactical</span>
-                                                <div class="item-header--author">
-                                                    <span class="material-icons">person_outline</span>
-                                                    <span>Coach Ole</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="lecture--item-content">
-                                            <div class="lecture-time">
-                                                <span class="material-icons">query_builder</span>
-                                                <span>20:00 - 22:00</span>
-                                            </div>
-                                            <div class="lecture-start-date">
-                                                <span class="material-icons">flag</span>
-                                                <span>Feb 15, 2022</span>
-                                            </div>
-                                            <div class="lecture-room">
-                                                <span class="material-icons">school</span>
-                                                <span>Room: ji8rnj</span>
-                                            </div>
-                                        </div>
-                                        <div class="lecture--detail-btn">
-                                            <a href="">Lecture detail</a>
-                                        </div>
+                                    <div class="home-ancm__list">
+
                                     </div>
                                 </div>
                             </div>
@@ -331,5 +260,131 @@
     <!-- -------------------- -->
     <!-- Boostrap javascript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(document).ready(() => {
+            let getCookie = (name) => {
+                var nameEQ = name + "=";
+                var ca = document.cookie.split(';');
+                for(var i=0;i < ca.length;i++) {
+                    var c = ca[i];
+                    while (c.charAt(0)==' ') c = c.substring(1,c.length);
+                    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+                }
+                return null;
+            };
+
+            let parseJwt = (token) => {
+                var base64Url = token.split('.')[1];
+                var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
+
+                return JSON.parse(jsonPayload);
+            };
+
+            let payLoad = parseJwt(getCookie('auth-token'));
+
+            $.ajax({
+                url: 'https://v3.football.api-sports.io/players/topscorers?season=2021&league=39',
+                type: 'GET',
+                dataType: 'json',
+                contentType: 'application/json',
+                headers: {
+                    'x-rapidapi-host': 'v3.football.api-sports.io',
+                    'x-rapidapi-key': '39ca433ef98ac8cb40a89b37f1111714'
+                },
+                success: (response) => {
+                    let html = '';
+                    let playerList = response.response;
+
+                    // console.log(playerList);
+
+                    for(let i = 0; i < 7; i++) { 
+                        html += `
+                            <tr>
+                                <td style="width: 5%;">
+                                    <div class="top-score__index">
+                                        <span>${i+1}</span>
+                                    </div>
+                                </td>
+                                <td style="width: 50%;">
+                                    <div class="top-score__name">
+                                        <span>${playerList[i].player.name}</span>
+                                    </div>
+                                </td>
+                                <td style="width: 15%;">
+                                    <div class="top-score__team">
+                                        <img src="${playerList[i].statistics[0].team.logo}" onerror="this.src='/images/avatar_test.jpg'">
+                                    </div>
+                                </td>
+                                <td style="width: 15%;">
+                                    <div class="top-score__games">
+                                        <span>${playerList[i].statistics[0].games.appearences}</span>
+                                    </div>
+                                </td>
+                                <td style="width: 15%;">
+                                    <div class="top-score__goals">
+                                        <span>${playerList[i].statistics[0].goals.total}</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        `;
+                    }
+
+                    $('#top-score-data').html(html);
+                }
+            });
+
+            $.ajax({
+                url: 'http://localhost:3001/coach/' + payLoad.data.member_id + '/announcements',
+                type: 'GET',
+                dataType: 'json',
+                contentType: 'application/json',
+                headers: {
+                    'auth-token': getCookie('auth-token'),
+                },
+                success: (response) => {
+                    let announcementList = response.data;
+
+                    let html = '';
+
+                    announcementList.forEach((announcement) => {
+                        let date = new Date(announcement.date_created);
+                        let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                        html += `
+                            <div class="announcement-management__announcement-item">
+                                <div class="announcement-item__image" style="width: 32px;">
+                                    <img src="${announcement.coach.photo}" onerror="this.src='/images/avatar_test.jpg'" alt="">
+                                </div>
+                                <div class="announcement-item__body">
+                                    <div class="announcement-item__header border-bottom" style="padding-bottom: 8px;">
+                                        <div class="announcement-item__author">
+                                            <span style="font-size: 18px;">${announcement.coach.name}</span>
+                                        </div>
+                                        <span>created a new post:</span>
+                                    </div>
+                                    <div class="announcement-item__title" style="padding-left: 0;">
+                                            <span>${unescape(announcement.title)}</span>
+                                        </div>
+                                    <div class="announcement-item__content">
+                                        <span>${unescape(announcement.message)}</span>
+                                    </div>
+                                    <div class="announcement-item__footer">
+                                        <div class="announcement-item__date">
+                                            <span>${date.toLocaleDateString("en-US", options)}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    $('.home-ancm__list').html(html);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
