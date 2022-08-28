@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap"
+        rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="/stylesheets/reset.css">
     <link rel="stylesheet" href="/stylesheets/base.css">
     <link rel="stylesheet" href="/stylesheets/main.css">
     <link rel="icon" href="/images/logo.png">
     <title>Offical Manchester United</title>
 </head>
+
 <body>
     <div class="app">
         <div class="container-fluid">
@@ -98,7 +103,7 @@
                                             <span class="material-icons">logout</span>
                                             <p>Logout</p>
                                         </a>
-                                        
+
                                     </li>
                                 </ul>
                             </div>
@@ -108,12 +113,15 @@
                         <div class="main-content">
                             <div class="content--header">
                                 <div class="header--avatar">
-                                    <img src="<%= member.avatar %> " onerror="this.src='/images/avatar_test.jpg'" alt="">
+                                    <img src="<%= member.avatar %> " onerror="this.src='/images/avatar_test.jpg'"
+                                        alt="">
                                 </div>
                                 <div class="header--text">
                                     <div class="header--username">
                                         <span>Hi, </span>
-                                        <p> <%= member.name %></p>
+                                        <p>
+                                            <%= member.name %>
+                                        </p>
                                     </div>
                                     <div class="header--greeting">
                                         <span>Welcome back, nice to see you again!</span>
@@ -130,19 +138,25 @@
                                 <div class="next-match--squad">
                                     <div class="squad squad-home">
                                         <div class="squad-logo">
-                                            <img src="<%= nextMatch.team_home.logo %>" onerror="this.src='/images/logo.png'">
+                                            <img src="<%= nextMatch.team_home.logo %>"
+                                                onerror="this.src='/images/logo.png'">
                                         </div>
                                         <div class="squad-name">
-                                            <span><%= nextMatch.team_home.name %></span>
+                                            <span>
+                                                <%= nextMatch.team_home.name %>
+                                            </span>
                                         </div>
                                     </div>
                                     <span class="next-match--vs">VS</span>
                                     <div class="squad squad-away">
                                         <div class="squad-logo">
-                                            <img src="<%= nextMatch.team_away.logo %>" onerror="this.src='/images/logo_away.png'">
+                                            <img src="<%= nextMatch.team_away.logo %>"
+                                                onerror="this.src='/images/logo_away.png'">
                                         </div>
                                         <div class="squad-name">
-                                            <span><%= nextMatch.team_away.name %></span>
+                                            <span>
+                                                <%= nextMatch.team_away.name %>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -151,13 +165,18 @@
                                         <span>KO <%= nextMatch.date.hour %>:<%= nextMatch.date.minute %> GMT</span>
                                     </div>
                                     <div class="next-match--day">
-                                        <span><%= nextMatch.date.month %> <%= nextMatch.date.day %>, <%= nextMatch.date.year %></span>
+                                        <span>
+                                            <%= nextMatch.date.month %>
+                                                <%= nextMatch.date.day %>, <%= nextMatch.date.year %>
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="next-match--stadium">
                                     <span class="material-icons">stadium</span>
                                     <div class="stadium-name">
-                                        <span><%= nextMatch.stadium %></span>
+                                        <span>
+                                            <%= nextMatch.stadium %>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -180,7 +199,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="top-score-data">
-                                                
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -206,36 +225,47 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <% standings.standings[0].forEach( team => { %> 
+                                            <% standings.standings[0].forEach( team=> { %>
                                                 <tr>
                                                     <td>
                                                         <div class="standings--rank">
-                                                            <span><%= team.rank %></span>
+                                                            <span>
+                                                                <%= team.rank %>
+                                                            </span>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="standings--team">
-                                                            <img src="<%= team.team.logo %>" onerror="this.src='/images/default.png'">
-                                                            <span><%= team.team.name %></span>
+                                                            <img src="<%= team.team.logo %>"
+                                                                onerror="this.src='/images/default.png'">
+                                                            <span>
+                                                                <%= team.team.name %>
+                                                            </span>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="standings--played">
-                                                            <span><%= team.all.played %></span>
+                                                            <span>
+                                                                <%= team.all.played %>
+                                                            </span>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="standings--gd">
-                                                            <span><%= team.goalsDiff %></span>
+                                                            <span>
+                                                                <%= team.goalsDiff %>
+                                                            </span>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="standings--point">
-                                                            <span><%= team.points %></span>
+                                                            <span>
+                                                                <%= team.points %>
+                                                            </span>
                                                         </div>
                                                     </td>
                                                 </tr>
-                                            <% }); %> 
+                                                <% }); %>
                                         </tbody>
                                     </table>
                                 </div>
@@ -249,11 +279,15 @@
 
     <!-- -------------------- -->
     <!-- Boostrap javascript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         $.ajax({
-            url: 'https://v3.football.api-sports.io/players/topscorers?season=2021&league=39',
+            url: 'https://v3.football.api-sports.io/players/topscorers?season=2022&league=39',
             type: 'GET',
             dataType: 'json',
             contentType: 'application/json',
@@ -267,12 +301,12 @@
 
                 console.log(playerList);
 
-                for(let i = 0; i < 7; i++) { 
+                for (let i = 0; i < 7; i++) {
                     html += `
                         <tr>
                             <td style="width: 5%;">
                                 <div class="top-score__index">
-                                    <span>${i+1}</span>
+                                    <span>${i + 1}</span>
                                 </div>
                             </td>
                             <td style="width: 50%;">
@@ -304,4 +338,5 @@
         })
     </script>
 </body>
+
 </html>
